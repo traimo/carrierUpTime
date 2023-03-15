@@ -1,0 +1,4 @@
+[
+  {"carrier": "FDXG", "url": "https://ws.fedex.com/web-services"},
+  {"carrier": "UPS", "url": "https://onlinetools.ups.com/webservices"}
+]
