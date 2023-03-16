@@ -47,11 +47,13 @@ def ping_url():
     for rec in result:
         response += rec["status"] + " " + rec["carrier"] + " " + rec["url"] + " " + rec["msg"] + '</br>'
 
-    if request.form["command"] == '/serp-uptime':
-        response = response.replace('</br>', '\r\n')
+    try:
+        if request.form["command"] == '/serp-uptime':
+            response = response.replace('</br>', '\r\n')
+    except KeyError as err:
+        response = response
 
     return response
-
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=8080)
