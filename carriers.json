@@ -1,4 +1,7 @@
 [
   {"carrier": "FDXG", "url": "https://ws.fedex.com/web-services"},
-  {"carrier": "UPS", "url": "https://onlinetools.ups.com/webservices"}
+  {"carrier": "UPS", "url": "https://onlinetools.ups.com/webservices"},
+  {"carrier": "PRLA", "url": "https://webservices.purolator.com/EWS/V1/PickUp/PickUpService.asmx"},
+  {"carrier": "DHLE", "url": "https://xmlpitest-ea.dhl.com/XMLShippingServlet"},
+  {"carrier": "ENDICIA", "url": "https://www.endicia.com/ELS/ELSServices.cfc?"}
 ]
