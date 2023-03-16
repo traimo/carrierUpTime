@@ -49,7 +49,7 @@ def ping_url():
 
     try:
         if request.form["command"] == '/serp-uptime':
-            response = response.replace('</br>', '\r\n')
+            response = response.replace(f'</br>', '\r\n')
     except KeyError as err:
         response = response
 
