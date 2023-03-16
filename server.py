@@ -48,7 +48,7 @@ def ping_url():
         response += rec["status"] + " " + rec["carrier"] + " " + rec["url"] + " " + rec["msg"] + '</br>'
 
     if request.form["command"] == '/serp-uptime':
-        response.replace('</br>', '\r\n')
+        response = response.replace('</br>', '\r\n')
 
     return response
 
