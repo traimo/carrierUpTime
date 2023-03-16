@@ -1,7 +1,7 @@
 from operator import itemgetter
 import requests
 import json
-from flask import Flask
+from flask import Flask, request
 
 
 app = Flask(__name__)
@@ -46,6 +46,9 @@ def ping_url():
     response = ""
     for rec in result:
         response += rec["status"] + " " + rec["carrier"] + " " + rec["url"] + " " + rec["msg"] + '</br>'
+
+    if request.form["command"] == '/serp-uptime':
+        response.replace('</br>', '\r\n')
 
     return response
 
