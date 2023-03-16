@@ -7,7 +7,7 @@ from flask import Flask
 app = Flask(__name__)
 
 
-@app.route('/', methods=['GET'])
+@app.route('/', methods=['POST', 'GET'])
 def ping_url():
     f = open('carriers.json')
     urls = json.load(f)
