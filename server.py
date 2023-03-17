@@ -44,14 +44,28 @@ def ping_url():
 
     result = sorted(result_list, key=itemgetter('msg'), reverse=False)
     response = ""
-    for rec in result:
-        response += rec["msg"] + " " + rec["status"] + " " + rec["carrier"] + " " + rec["url"] + '</br>'
 
     try:
         if request.form["command"] == '/serp-uptime':
-            response = response.replace(f'</br>', '\r\n')
+            for rec in result:
+                response += rec["msg"] + " " + rec["status"] + " " + rec["carrier"] + " " + rec["url"] + '\r\n'
+            return response
+
     except KeyError as err:
         response = response
+
+    table = "<table>\n"
+    table += "<tr><th>Status</th><th>Code</th><th>Carrier</th><th>URL</th></tr>\n"
+
+    for rec in result:
+        msg = rec["msg"]
+        status = rec["status"]
+        carrier = rec["carrier"]
+        url = rec["url"]
+        table += f"<tr><td>{msg}</td><td>{status}</td><td>{carrier}</td><td>{url}</td></tr>\n"
+
+    table += "</table>"
+    response = table
 
     return response
 
