@@ -49,6 +49,7 @@ def ping_url():
         if request.form["command"] == '/serp-uptime':
             for rec in result:
                 response += rec["msg"] + " " + rec["status"] + " " + rec["carrier"] + " " + rec["url"] + '\r\n'
+            response += "https://n3uutmqmdv.us-west-2.awsapprunner.com/"
             return response
 
     except KeyError as err:
@@ -64,7 +65,7 @@ def ping_url():
         url = rec["url"]
         table += f"<tr><td>{msg}</td><td>{status}</td><td>{carrier}</td><td>{url}</td></tr>\n"
 
-    table += f"<tr><td span=4><a href=https://n3uutmqmdv.us-west-2.awsapprunner.com/>Check Up Time</a></td></tr>\n"
+    #table += f"<tr><td span=4><a href=https://n3uutmqmdv.us-west-2.awsapprunner.com/>Check Up Time</a></td></tr>\n"
     table += "</table>"
     response = table
 
