@@ -64,6 +64,7 @@ def ping_url():
         url = rec["url"]
         table += f"<tr><td>{msg}</td><td>{status}</td><td>{carrier}</td><td>{url}</td></tr>\n"
 
+    table += f"<tr><td span=4><a href=https://n3uutmqmdv.us-west-2.awsapprunner.com/>Check Up Time</a></td></tr>\n"
     table += "</table>"
     response = table
 
