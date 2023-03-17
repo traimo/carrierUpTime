@@ -28,13 +28,13 @@ def ping_url():
         try:
             response = requests.get(rec["url"])
             response.raise_for_status()
-            msg = "UP and running"
+            msg = "UP  "
 
         except requests.exceptions.HTTPError as error:
-            if response.status_code == 405:
-                msg = "UP and running"
+            if response.status_code == 405 or response.status_code == 401:
+                msg = "UP  "
             else:
-                msg = "Not Available"
+                msg = "DOWN"
         except requests.exceptions.RequestException as error:
             msg = "ERROR: " + {error}
 
@@ -42,10 +42,10 @@ def ping_url():
 
         result_list.append(result_dict)
 
-    result = sorted(result_list, key=itemgetter('status'), reverse=True)
+    result = sorted(result_list, key=itemgetter('msg'), reverse=False)
     response = ""
     for rec in result:
-        response += rec["status"] + " " + rec["carrier"] + " " + rec["url"] + " " + rec["msg"] + '</br>'
+        response += rec["msg"] + " " + rec["status"] + " " + rec["carrier"] + " " + rec["url"] + '</br>'
 
     try:
         if request.form["command"] == '/serp-uptime':
