@@ -12,10 +12,6 @@ def ping_url():
     f = open('carriers.json')
     urls = json.load(f)
 
-    msg = ""
-    carrier = ""
-    status = ""
-    url = ""
     response = ""
     result_dict = {}
     result_list = []
