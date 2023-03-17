@@ -17,26 +17,7 @@ def ping_url():
     result_list = []
 
     for rec in urls:
-
-        carrier = rec["carrier"]
-        status = ""
-        url = rec['url']
-        try:
-            response = requests.get(rec["url"])
-            response.raise_for_status()
-            msg = "UP  "
-
-        except requests.exceptions.HTTPError as error:
-            if response.status_code == 405 or response.status_code == 401:
-                msg = "UP  "
-            else:
-                msg = "DOWN"
-        except requests.exceptions.RequestException as error:
-            msg = "ERROR: " + {error}
-
-        result_dict = {"status": str(response.status_code), "carrier": carrier, "url": url, "msg": msg}
-
-        result_list.append(result_dict)
+        test_url(rec, response, result_list)
 
     result = sorted(result_list, key=itemgetter('msg'), reverse=False)
     response = ""
@@ -51,21 +32,45 @@ def ping_url():
     except KeyError as err:
         response = response
 
+    table = format_html(result)
+    response = table
+
+    return response
+
+
+def test_url(rec, response, result_list):
+    carrier = rec["carrier"]
+    status = ""
+    url = rec['url']
+    try:
+        response = requests.get(rec["url"])
+        response.raise_for_status()
+        msg = "UP  "
+
+    except requests.exceptions.HTTPError as error:
+        if response.status_code == 405 or response.status_code == 401:
+            msg = "UP  "
+        else:
+            msg = "DOWN"
+    except requests.exceptions.RequestException as error:
+        msg = "ERROR: " + {error}
+    result_dict = {"status": str(response.status_code), "carrier": carrier, "url": url, "msg": msg}
+    result_list.append(result_dict)
+
+
+def format_html(result):
     table = "<table>\n"
     table += "<tr><th>Status</th><th>Code</th><th>Carrier</th><th>URL</th></tr>\n"
-
     for rec in result:
         msg = rec["msg"]
         status = rec["status"]
         carrier = rec["carrier"]
         url = rec["url"]
         table += f"<tr><td>{msg}</td><td>{status}</td><td>{carrier}</td><td>{url}</td></tr>\n"
-
-    #table += f"<tr><td span=4><a href=https://n3uutmqmdv.us-west-2.awsapprunner.com/>Check Up Time</a></td></tr>\n"
+    # table += f"<tr><td span=4><a href=https://n3uutmqmdv.us-west-2.awsapprunner.com/>Check Up Time</a></td></tr>\n"
     table += "</table>"
-    response = table
+    return table
 
-    return response
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=8080)
