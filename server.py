@@ -21,15 +21,16 @@ def ping_url():
 
     result = sorted(result_list, key=itemgetter('msg'), reverse=False)
     response = ""
-    try:
-        token = request.form["token"]
-        if token != "AqiUWVArAPI4UapjOaDQVj03":
-            return "Invalid Slack Token"
-    except ValueError as err:
-        return "Missing Slack Token"
+    # try:
+    #     token = request.form["token"]
+    #     if token != "AqiUWVArAPI4UapjOaDQVj03":
+    #         return "Invalid Slack Token"
+    # except ValueError as err:
+    #     return "Missing Slack Token"
 
     try:
-        if request.form["command"] == '/serp-uptime':
+        if request.form["command"] == '/serp-uptime' and \
+           request.form["token"] == 'AqiUWVArAPI4UapjOaDQVj03':
             for rec in result:
                 response += rec["msg"] + " " + rec["status"] + " " + rec["carrier"] + " " + rec["url"] + '\r\n'
             response += "https://n3uutmqmdv.us-west-2.awsapprunner.com/"
