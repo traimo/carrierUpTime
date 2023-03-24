@@ -13,7 +13,6 @@ def ping_url():
     urls = json.load(f)
 
     response = ""
-    result_dict = {}
     result_list = []
 
     for rec in urls:
