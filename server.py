@@ -22,12 +22,12 @@ def ping_url():
     result = sorted(result_list, key=itemgetter('msg'), reverse=False)
     response = ""
 
-    try:
-        token = request.form["token"]
-        if token != "K2AuO1ZvEt2GYcVfiz1ObDh7":
-            return "Invalid Slack Token"
-    except ValueError as err:
-        return "Missing Slack Token"
+    # try:
+    #     token = request.form["token"]
+    #     if token != "K2AuO1ZvEt2GYcVfiz1ObDh7":
+    #         return "Invalid Slack Token"
+    # except ValueError as err:
+    #     return "Missing Slack Token"
 
     try:
         if request.form["command"] == '/serp-uptime':
